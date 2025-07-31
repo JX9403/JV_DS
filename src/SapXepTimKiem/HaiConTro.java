@@ -1,6 +1,8 @@
-package HaiConTro;
+package SapXepTimKiem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,47 +202,150 @@ public class HaiConTro {
 		for (int r = 0; r < n; r++) {
 			sum += a[r];
 			while (sum >= s) {
-				ans += n - r ; 
-				sum -= a[l] ;
-				l++ ;
+				ans += n - r;
+				sum -= a[l];
+				l++;
 			}
 		}
-		
+
 		System.out.println(ans);
 	}
-	
+
 //	đếm số lượng mảng con có số lượng phần tử khác nhau không vượt quá s
 //	11 3
 //	5 4 4 5 4 4 2 1 5 2 4
-	
+
 	public static void so_luong_day_con_co_so_luong_phan_tu_khac_nhau_nho_hon_hoac_bang_s() {
 		int n = sc.nextInt();
-        long s = sc.nextLong();
-        int[] a = new int[n];
-        
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
-        }
-        
-        int l = 0, res = Integer.MAX_VALUE ;
-        
-        Map<Integer, Integer> mp = new HashMap<Integer, Integer>();
-        
-        for( int r = 0; r < n; r++) {
-        	mp.put(a[r], mp.getOrDefault(a[r], 0) + 1);
+		long s = sc.nextLong();
+		int[] a = new int[n];
 
-        	while( mp.size() > s ) {
-        		mp.put(a[l], mp.get(a[l]) - 1);
-        		if (mp.get(a[l]) == 0) {
-                    mp.remove(a[l]);
-                }
-        		l++;
-        	}
-        	
-        	res = Math.min( res, r - l + 1);
-        	
-        }
-        System.out.println(res);
+		for (int i = 0; i < n; i++) {
+			a[i] = sc.nextInt();
+		}
+
+		int l = 0, res = Integer.MAX_VALUE;
+
+		Map<Integer, Integer> mp = new HashMap<Integer, Integer>();
+
+		for (int r = 0; r < n; r++) {
+			mp.put(a[r], mp.getOrDefault(a[r], 0) + 1);
+
+			while (mp.size() > s) {
+				mp.put(a[l], mp.get(a[l]) - 1);
+				if (mp.get(a[l]) == 0) {
+					mp.remove(a[l]);
+				}
+				l++;
+			}
+
+			res = Math.min(res, r - l + 1);
+
+		}
+		System.out.println(res);
+	}
+
+//	Dếm số lượng mảng con có các phần tử liên tiếp trong mảng mà độc hên lệch giữa phần tử lớn nhất và phần tử nhỏ
+//	nhất trong mảng con đó không vượt quá K
+//	10  1
+//	2 3 1 3 1 4 1 3 1 2
+
+	public static void SegCount4() {
+		int n = sc.nextInt(), s = sc.nextInt();
+
+		int[] a = new int[n];
+
+		for (int i = 0; i < n; i++)
+			a[i] = sc.nextInt();
+		int l = 0, res = 0;
+
+		for (int r = 1; r < n; r++) {
+			if (Math.abs(a[r] - a[l]) > s) {
+				l++;
+			}
+
+			res += r - l + 1;
+		}
+	}
+
+//	Tronj 2 day 
+	public static void tron_2_day() {
+		int n = sc.nextInt(), m = sc.nextInt();
+
+		int[] a = new int[n];
+		int[] b = new int[m];
+
+		for (int i = 0; i < n; i++)
+			a[i] = sc.nextInt();
+		for (int i = 0; i < m; i++)
+			b[i] = sc.nextInt();
+
+		int i = 0, j = 0;
+
+		while (i < m && j < m) {
+			if (a[i] == b[j]) {
+				System.out.print(a[i] + " " + b[j] + " ");
+				i++;
+				j++;
+			} else if (a[i] < b[j]) {
+				System.out.println(a[i] + " ");
+				i++;
+			} else {
+				System.out.println(b[j] + " ");
+				j++;
+			}
+		}
+
+		while (i < n) {
+			System.out.println(a[i] + " ");
+			i++;
+		}
+
+		while (j < m) {
+			System.out.println(b[j] + " ");
+			j++;
+		}
+	}
+
+//	Sap xep khieu vu, 2 mang , a la nam, b la nu, dem xem co bao nhieu cap, ma nam phai cao hon nu
+//	1 5 5
+//	2668 2956 20933 21199 24224
+//	11521 13084 19573 25628 28958
+	public static void khieu_vu() {
+		int n = sc.nextInt(), m = sc.nextInt();
+
+		Integer[] a = new Integer[n];
+		Integer[] b = new Integer[m];
+
+		for (int i = 0; i < n; i++)
+			a[i] = sc.nextInt();
+		for (int i = 0; i < m; i++)
+			b[i] = sc.nextInt();
+
+		Arrays.sort(a, new  Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o2 - o1;
+			}
+		});
+		
+		Arrays.sort(b , new  Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o2 - o1;
+			}
+		});
+		int i = 0, j = 0, cnt = 0;
+		
+		while( i < n && j < m ) {
+			if( a[i] > b[j]) {
+				cnt++ ; i++; j++;
+			} else { 
+				j++ ;
+			}
+		}
+		
+		System.out.println(cnt);
 	}
 
 	public static void main(String[] args) {
@@ -251,7 +356,9 @@ public class HaiConTro {
 //			day_con_dai_nhat_tong_lon_hon_hoac_bang_s();
 //			so_luong_mang_con_co_tong_nho_hon_s();
 //			so_luong_mang_con_co_tong_lon_hon_hoac_bang_s();
-			so_luong_day_con_co_so_luong_phan_tu_khac_nhau_nho_hon_hoac_bang_s();
+//			so_luong_day_con_co_so_luong_phan_tu_khac_nhau_nho_hon_hoac_bang_s();
+//			tron_2_day();
+			khieu_vu();
 		}
 	}
 
