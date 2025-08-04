@@ -89,13 +89,22 @@ public class SapXepTimKiem {
 		System.out.println(cnt);
 	}
 
+	public static void ALGOPRO7() {
+		int n = sc.nextInt(), k = sc.nextInt();
+		int[] a = new int[n];
+
+		for (int i = 0; i < n; i++)
+			a[i] = sc.nextInt();
+
+		Arrays.sort(a);
+
+		System.out.println(a[k]);
+	}
+
 	public static void main(String[] args) {
-		int t = 3;
-		while (t-- > 0) {
-//			xep_gach();
-//			vat_sua_bo();
-			chia_nhom();
-		}
+
+			ALGOPRO7();
+		
 	}
 
 }
