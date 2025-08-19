@@ -215,27 +215,6 @@ public class XauKyTu {
 		}
 	}
 
-	public static void xau_con_lien_tiep2() {
-		String s = sc.nextLine();
-		
-		List<String> ls = new ArrayList<String>();
-		for( int i = 1 ; i < s.length() ; i++) {
-			char c = s.charAt(i);
-			
-			String tmp = "";
-			
-			while( i < s.length() && s.charAt(i - 1) == s.charAt(i)) {
-				tmp += String.valueOf(s.charAt(i -1)) +  String.valueOf(s.charAt(i));
-				i++;
-			}
-			
-			ls.add(tmp);
-			i--;
-		}
-		for( int j = 0 ; j < ls.size() ; j++) {
-			System.out.println(ls.get(j));
-		}
-	}
 
 	public static void main(String[] args) {
 //		sap_xep_xau_thuan_nghich();
@@ -244,6 +223,6 @@ public class XauKyTu {
 //		kiem_tra_xau_con();
 //		chuan_hoa_ten_tuoi();
 
-		xau_con_lien_tiep2();
+		xau_con_lien_tiep();
 	}
 }
